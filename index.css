@@ -102,6 +102,26 @@ html {
     }
 }
 
+.movie .movie-desc {
+    padding-top: 24px;
+}
+
+.movie .movie-desc.collapse:not(.show) {
+    display: block !important;
+    height: 24px;
+    overflow: hidden;
+}
+
+.movie .movie-desc .card-text {
+    margin-top: -24px;
+    text-overflow: ellipsis;
+}
+
+.movie .movie-desc.collapse:not(.show) .card-text {
+    overflow: hidden;
+    white-space: nowrap;
+}
+
 footer {
     min-height: 300px;
 
