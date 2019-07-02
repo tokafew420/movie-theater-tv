@@ -20,6 +20,17 @@
             });
     });
 
+    function toMMDDYYYY(date) {
+        var year = date.getFullYear();
+        var month = (1 + date.getMonth()).toString();
+        var day = date.getDate().toString();
+
+        month = month.length > 1 ? month : '0' + month;
+        day = day.length > 1 ? day : '0' + day;
+
+        return month + '/' + day + '/' + year;
+    }
+
     function tryParseJson(json) {
         try {
             return JSON.parse(json);
@@ -78,7 +89,8 @@
                 $('.card-title', $card).text(movie.title);
                 $('.card-img-top', $card).attr('src', imageUrl300x450 + movie.poster_path).attr('alt', movie.title);
                 $('#movie-desc', $card).attr('id', movieDescId);
-                $('#' + movieDescId + ' .card-text', $card).text(movie.overview);
+                $('#' + movieDescId + ' .movie-summary', $card).text(movie.overview);
+                $('#' + movieDescId + ' .movie-release-date', $card).text(toMMDDYYYY(new Date(movie.release_date)));
                 $('.movie-desc-toggle', $card).attr('href', '#' + movieDescId).attr('aria-controls', movieDescId);
                 $row.append($card);
 
@@ -95,14 +107,14 @@
                                 videoEmbeddable: 'true'
                             })
                             .then(function (res) {
+                                console.log('Response', res);
                                 done(null, res);
                             }, function (err) {
                                 console.error('Execute error', err);
-                                done(err);
+                                done(null, err);
                             });
                     }).then(function (res) {
-                        console.log('Response', res);
-                        if (res && res.result && res.result.items) {
+                        if (res && res.status === 200 && res.result && res.result.items) {
                             res.result.items.forEach(function (result) {
                                 var match = result.snippet.title.match(new RegExp(movie.title + ' trailer #(\\d).*', 'i'));
                                 var num = match && +match[1];
@@ -140,7 +152,6 @@
     $('footer #year').text(date.getFullYear());
 
     $('body').on('shown.bs.collapse', '.movie-desc', function () {
-        console.log(this);
         var $this = $(this);
         $('.movie-desc-toggle', $this.parent()).text('Show less');
     }).on('hidden.bs.collapse', '.movie-desc', function () {

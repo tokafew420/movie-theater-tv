@@ -11,23 +11,31 @@ html {
 }
 
 .banner {
-    font-family: 'Russo One', sans-serif;
+    font-family: 'Comfortaa', cursive;
 }
 
 .banner .title {
-    font-size: 3rem;
+    font-size: 2rem;
     white-space: nowrap;
 }
 
+.banner .title .title-movie {
+    color: orange;
+}
+
+.banner .title .title-theater {
+    color: blue;
+}
+
 .banner .title .circle {
+    background-color: orange;
     display: inline-block;
-    height: 4rem;
-    width: 4rem;
-    line-height: 60px;
-    -moz-border-radius: 2rem;
-    border-radius: 2rem;
+    height: 2.5rem;
+    width: 2.5rem;
+    -moz-border-radius: 1rem;
+    border-radius: 1.5rem;
     text-align: center;
-    line-height: 76px;
+    line-height: 47px;
     position: relative;
 }
 
@@ -35,9 +43,31 @@ html {
     position: absolute;
     content: "TM";
     font-size: .5rem;
-    top: -16px;
-    left: 47px;
+    top: -11px;
+    left: 24px;
 }
+
+@media (min-width: 364px) {
+    .banner .title {
+        font-size: 3rem;
+    }
+
+    .banner .title .circle {
+        height: 4rem;
+        width: 4rem;
+        line-height: 60px;
+        -moz-border-radius: 2rem;
+        border-radius: 2rem;
+        line-height: 76px;
+    }
+
+    .banner .title .circle::after {
+        font-size: .5rem;
+        top: -16px;
+        left: 47px;
+    }
+}
+
 
 @media (min-width: 576px) {
     .banner .title {
@@ -112,12 +142,12 @@ html {
     overflow: hidden;
 }
 
-.movie .movie-desc .card-text {
+.movie .movie-desc .movie-summary {
     margin-top: -24px;
     text-overflow: ellipsis;
 }
 
-.movie .movie-desc.collapse:not(.show) .card-text {
+.movie .movie-desc.collapse:not(.show) .movie-summary {
     overflow: hidden;
     white-space: nowrap;
 }
