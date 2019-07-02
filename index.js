@@ -61,7 +61,7 @@
                 '&language=en-US' +
                 '&certification_country=US' +
                 '&certification.lte=PG-13' +
-                '&sort_by=release_date.desc' +
+                '&sort_by=popularity.desc' +
                 '&include_adult=false' +
                 '&include_video=true' +
                 '&page=1' +
