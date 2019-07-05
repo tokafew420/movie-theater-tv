@@ -141,7 +141,7 @@
                                     $('.video-thumbnail', $trailer)
                                         .attr('src', result.snippet.thumbnails.medium.url)
                                         .attr('alt', caption);
-                                    $('.carousel-caption h5', $trailer).text(caption);
+                                    $('.carousel-caption .trailer-caption', $trailer).text(caption);
                                     $('.carousel-inner', $trailers).append($trailer);
                                     $('.carousel-indicators', $trailers).append('<li data-target="#' + trailersId + '" data-slide-to="' + num + '" class="' + activeClass + '"></li>');
 
