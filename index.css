@@ -152,7 +152,40 @@ html {
     white-space: nowrap;
 }
 
+.trailers .trailer:hover {
+    cursor: pointer;
+}
+
+.trailers .trailer .overlay {
+    background-color: rgba(0,0,0, .4);
+    display: none;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.trailers .trailer .overlay img {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.trailers .trailer:hover .overlay {
+    display: block;
+}
+
+.trailers .carousel-caption {
+    background-color: rgba(0, 0, 0, 0.6);
+    bottom: -28px;
+    left: 0%;
+    right: 0%;
+}
+
 footer {
     min-height: 300px;
-
 }

@@ -31,6 +31,10 @@
         return month + '/' + day + '/' + year;
     }
 
+    function scrubTitle(title) {
+        return title.replace(/[^a-zA-Z0-9\s#]/g, '').replace(/\s+/g, ' ');
+    }
+
     function tryParseJson(json) {
         try {
             return JSON.parse(json);
@@ -94,6 +98,10 @@
                 $('.movie-desc-toggle', $card).attr('href', '#' + movieDescId).attr('aria-controls', movieDescId);
                 $row.append($card);
 
+                var trailersId = 'trailers-' + movie.id;
+                var $trailers = $('#trailers-movie-id', $card).attr('id', trailersId);
+                $('[href="#trailers-movie-id"]', $trailers).attr('href', '#' + trailersId);
+
                 // Get Trailers
                 gapiDeferred.then(function () {
                     cache.get('trailer-' + movie.id, function (done) {
@@ -116,21 +124,35 @@
                     }).then(function (res) {
                         if (res && res.status === 200 && res.result && res.result.items) {
                             res.result.items.forEach(function (result) {
-                                var match = result.snippet.title.match(new RegExp(movie.title + ' trailer #(\\d).*', 'i'));
-                                var num = match && +match[1];
-                                if (!isNaN(num) && num > 0) {
+                                var match = scrubTitle(result.snippet.title).match(new RegExp('^' + scrubTitle(movie.title) + '.*', 'i'));
+                                var num = $('.carousel-indicators li', $trailers).length;
+                                var activeClass = num === 0 ? 'active' : '';
+                                if (match) {
                                     console.log('Passed: ' + result.snippet.title);
-                                    var $trailer = $trailerTemplate.clone().removeClass('trailer-template d-none').addClass('trailer');
-                                    $trailer.attr('data-video-id', result.id.videoId)
-                                    $trailer.html('<img src="' + result.snippet.thumbnails.default.url + '" width="" height=""></img>')
-                                    $('.trailers .row', $card).append($trailer);
+                                    var $trailer = $trailerTemplate.clone()
+                                        .removeClass('trailer-template d-none')
+                                        .addClass('trailer ' + activeClass);
+                                    $trailer.attr('data-video-id', result.id.videoId).attr('data-trailer-no', num);
+                                    var caption = result.snippet.title.substr(0, result.snippet.title.indexOf('|'))
+                                        .replace(/\(\d{4}\)/, '')
+                                        .replace(new RegExp(movie.title, 'i'), '')
+                                        .trim();
+                                        caption = scrubTitle(caption).replace(scrubTitle(movie.title), '');
+                                    $('.video-thumbnail', $trailer)
+                                        .attr('src', result.snippet.thumbnails.medium.url)
+                                        .attr('alt', caption);
+                                    $('.carousel-caption h5', $trailer).text(caption);
+                                    $('.carousel-inner', $trailers).append($trailer);
+                                    $('.carousel-indicators', $trailers).append('<li data-target="#' + trailersId + '" data-slide-to="' + num + '" class="' + activeClass + '"></li>');
+
+                                    $trailers.carousel();
                                 } else {
                                     console.log('Failed: ' + result.snippet.title);
                                 }
                             });
                         }
                     });
-                })
+                });
             });
         }
     });

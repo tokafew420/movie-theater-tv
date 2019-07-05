@@ -21,7 +21,8 @@
 <body>
     <div class="jumbotron jumbotron-fluid banner">
         <div class="container-fluid">
-            <h1 class="title display-4 text-left"><span class="title-movie">movie</span><span class="title-theater">theater</span><span class="circle text-light">tv</span></h1>
+            <h1 class="title display-4 text-left"><span class="title-movie">movie</span><span
+                    class="title-theater">theater</span><span class="circle text-light">tv</span></h1>
         </div>
     </div>
     <!-- Template -->
@@ -36,7 +37,8 @@
                         make up the bulk of the
                         card's
                         content.</p>
-                    <p class="card-text"><strong>Release Date:</strong> <span class="movie-release-date">12/12/2019</span></p>
+                    <p class="card-text"><strong>Release Date:</strong> <span
+                            class="movie-release-date">12/12/2019</span></p>
                 </div>
                 <div>
                     &nbsp;
@@ -45,16 +47,31 @@
                         Show more
                     </a>
                 </div>
-                <div class="trailers">
-                    <div class="container">
-                        <div class="row">
-                        </div>
+                <div id="trailers-movie-id" class="trailers carousel slide mt-1" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                    </ol>
+                    <div class="carousel-inner">
                     </div>
+                    <a class="carousel-control-prev" href="#trailers-movie-id" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#trailers-movie-id" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
                 </div>
             </div>
         </div>
     </div>
-    <div class="trailer-template col-6 d-none">
+    <div class="trailer-template d-none carousel-item">
+        <div class="overlay">
+            <img src="img/youtube_social_icon_red.png" alt="youtube">
+        </div>
+        <img class="video-thumbnail d-block w-100" src="..." alt="..."></img>
+        <div class="carousel-caption d-none d-md-block ">
+            <h5>Movie Title</h5>
+        </div>
     </div>
     <!-- Main Section -->
     <section id="movies" class="content-section text-center">
@@ -66,7 +83,7 @@
     <div class="modal fade trailer-modal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content p-2">
-                <iframe style="min-height: 320px;" src="" frameborder="0"
+                <iframe style="min-height: 420px;" src="" frameborder="0"
                     allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                     allowfullscreen></iframe>
             </div>
