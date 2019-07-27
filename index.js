@@ -68,7 +68,7 @@
                 storage.setItem(key, JSON.stringify(data));
             }
         };
-    })(window.sessionStorage);
+    })(window.localStorage);
 
     cache.get('movie-list-' + dateStamp, function (done) {
         var releaseDate = new Date(new Date(date).setMonth(date.getMonth() - 3)).toISOString().split('T')[0];
@@ -96,6 +96,20 @@
                 $('#' + movieDescId + ' .movie-summary', $card).text(movie.overview);
                 $('#' + movieDescId + ' .movie-release-date', $card).text(toMMDDYYYY(new Date(movie.release_date)));
                 $('.movie-desc-toggle', $card).attr('href', '#' + movieDescId).attr('aria-controls', movieDescId);
+
+                // Set ratings
+                var rating = Math.round(movie.vote_average /* 1-10 */) / 2;
+                var $rating = $('.rating', $card).html('');
+                for(var i = 0; i < 5; i++) {
+                    if(rating <= i) {
+                        $rating.append('<i class="fa fa-star-o mx-1"></i>');
+                    } else if (rating >= i + 1) {
+                        $rating.append('<i class="fa fa-star mx-1"></i>');
+                    } else {
+                        $rating.append('<i class="fa fa-star-half-o mx-1"></i>');
+                    }
+                }
+
                 $row.append($card);
 
                 var trailersId = 'trailers-' + movie.id;

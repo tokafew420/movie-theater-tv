@@ -47,6 +47,16 @@ html {
     left: 24px;
 }
 
+.banner .sub-title {
+    position: relative;
+}
+
+.banner .sub-title span {
+    position: absolute;
+    font-size: 1em;
+    left: 58px;
+}
+
 @media (min-width: 364px) {
     .banner .title {
         font-size: 3rem;
@@ -66,8 +76,12 @@ html {
         top: -16px;
         left: 47px;
     }
-}
 
+    .banner .sub-title span {
+        font-size: 1.5em;
+        left: 96px;
+    }
+}
 
 @media (min-width: 576px) {
     .banner .title {
@@ -87,6 +101,11 @@ html {
         font-size: .7rem;
         top: -19px;
         left: 58px;
+    }
+
+    .banner .sub-title span {
+        font-size: 2em;
+        left: 125px;
     }
 }
 
@@ -109,6 +128,11 @@ html {
         top: -24px;
         left: 69px;
     }
+
+    .banner .sub-title span {
+        font-size: 2.5em;
+        left: 148px;
+    }
 }
 
 @media (min-width: 992px) {
@@ -129,6 +153,11 @@ html {
         font-size: 1rem;
         top: -28px;
         left: 80px;
+    }
+
+    .banner .sub-title span {
+        font-size: 3em;
+        left: 182px;
     }
 }
 
@@ -152,12 +181,20 @@ html {
     white-space: nowrap;
 }
 
+.movie .rating {
+    color: #fafa34;
+    background-color: #606060;
+    width: 128px;
+    display: inline-block;
+    border-radius: 4px;
+}
+
 .trailers .trailer:hover {
     cursor: pointer;
 }
 
 .trailers .trailer .overlay {
-    background-color: rgba(0,0,0, .4);
+    background-color: rgba(0, 0, 0, .4);
     display: none;
     position: absolute;
     top: 0;
